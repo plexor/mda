@@ -47,7 +47,7 @@
 
     <div class="container">
       <div class="my-4" id="content">
-        <div class="h2">PRIVATE TEXT: Logged in content goes here</div>
+        <div class="h2">PRIVATE TEXT when in: Logged in content goes here</div>
       </div>
       <div>
         <p>Public Text</p>
@@ -60,75 +60,74 @@
     </footer>
 
     <script>
-             (async function(){
-                 const serverUrl = "https://yzpfthh5clam.usemoralis.com:2053/server"
-                 const appId = "jusFwLq4usCZMbjdkJYu2YkTPv9suBBSHpKskgfB"
-                 await Moralis.start({serverUrl, appId})
-             })()
+      (async function () {
+        const serverUrl = "https://yzpfthh5clam.usemoralis.com:2053/server";
+        const appId = "jusFwLq4usCZMbjdkJYu2YkTPv9suBBSHpKskgfB";
+        await Moralis.start({ serverUrl, appId });
+      })();
 
-            const serverUrl = "SERVER_URL";
-            const appId = "APP_ID";
-            
-      await Moralis.start({ serverUrl, appId });
+      // Initialise Moralisq
+      const serverUrl = "SERVER_URL";
+      const appId = "APP_ID";
+      Moralis.start({ serverUrl, appId });
 
-            async function login() {
-              try {
-                let currentUser = Moralis.User.current();
-                if (!currentUser) {
-                  if (typeof screen.orientation === "undefined") {
-                    
-                    await Moralis.authenticate({ provider: "walletconnect" })
+      async function login() {
+        try {
+          let currentUser = Moralis.User.current();
+          if (!currentUser) {
+            if (typeof screen.orientation === "undefined") {
+              // await Moralis.authenticate({ provider: "walletconnect" })
 
-                    const user = await Moralis.authenticate({
-                      provider: "walletconnect",
-                      signingMessage: "my new custom message: hello",
-                      mobileLinks: [
-                        "rainbow",
-                        "metamask",
-                        "argent",
-                        "trust",
-                        "imtoken",
-                        "pillar",
-                      ],
-                    });
-                  } else {
-                    currentUser = await Moralis.authenticate();
-                  }
-                  checkUser();
-                }
-              } catch (error) {
-                console.log(error);
-              }
+              const user = await Moralis.authenticate({
+                provider: "walletconnect",
+                signingMessage: "my new custom message: hello",
+                mobileLinks: [
+                  "rainbow",
+                  "metamask",
+                  "argent",
+                  "trust",
+                  "imtoken",
+                  "pillar",
+                ],
+              });
+            } else {
+              currentUser = await Moralis.authenticate();
             }
-
-            logout = async () => {
-              alert("log out clicked");
-              await Moralis.User.logOut();
-              checkUser();
-            };
-
-            function checkUser() {
-              currentUser = Moralis.User.current();
-              if (currentUser) {
-                document.getElementById("login_button").style.display = "none";
-                document.getElementById("logout_button").style.display = "block";
-                document.getElementById("content").style.display = "block";
-              } else {
-                document.getElementById("login_button").style.display = "block";
-                document.getElementById("logout_button").style.display = "none";
-                document.getElementById("content").style.display = "none";
-              }
-            }
-
-            document.getElementById("login_button").onclick = login;
-            document.getElementById("logout_button").onclick = logout;
             checkUser();
-      //use this to prevent bug on ios
-            document.addEventListener("visibilitychange", () => {
-              if (document.visibilityState === "hidden") {
-                window.localStorage.removeItem("WALLETCONNECT_DEEPLINK_CHOICE");
-              }
-            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      logout = async () => {
+        alert("log out clicked");
+        await Moralis.User.logOut();
+        checkUser();
+      };
+
+      function checkUser() {
+        currentUser = Moralis.User.current();
+        if (currentUser) {
+          document.getElementById("login_button").style.display = "none";
+          document.getElementById("logout_button").style.display = "block";
+          document.getElementById("content").style.display = "block";
+        } else {
+          document.getElementById("login_button").style.display = "block";
+          document.getElementById("logout_button").style.display = "none";
+          document.getElementById("content").style.display = "none";
+        }
+      }
+
+      document.getElementById("login_button").onclick = login;
+      document.getElementById("logout_button").onclick = logout;
+      checkUser();
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          window.localStorage.removeItem("WALLETCONNECT_DEEPLINK_CHOICE");
+        }
+      });
     </script>
   </body>
 </html>
