@@ -68,14 +68,16 @@
 
             const serverUrl = "SERVER_URL";
             const appId = "APP_ID";
-            Moralis.start({ serverUrl, appId });
+            
+      await Moralis.start({ serverUrl, appId });
 
             async function login() {
               try {
                 let currentUser = Moralis.User.current();
                 if (!currentUser) {
                   if (typeof screen.orientation === "undefined") {
-                    // await Moralis.authenticate({ provider: "walletconnect" })
+                    
+                    await Moralis.authenticate({ provider: "walletconnect" })
 
                     const user = await Moralis.authenticate({
                       provider: "walletconnect",
