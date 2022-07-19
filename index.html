@@ -23,6 +23,7 @@
       pre {
         font-size: 20px;
         cursor: pointer;
+        background-color: 
       }
       .footer {
         position: absolute;
@@ -32,6 +33,12 @@
         line-height: 60px;
         background-color: #f5f5f5;
       }
+      
+      .jumbotron {
+        
+        background-color: black;
+      }
+      
     </style>
   </head>
 
@@ -60,17 +67,15 @@
     </footer>
 
     <script>
-      (async function () {
-        const serverUrl = "https://yzpfthh5clam.usemoralis.com:2053/server";
-        const appId = "jusFwLq4usCZMbjdkJYu2YkTPv9suBBSHpKskgfB";
-        await Moralis.start({ serverUrl, appId });
-      })();
-
-      // Initialise Moralisq
-      const serverUrl = "SERVER_URL";
-      const appId = "APP_ID";
-      Moralis.start({ serverUrl, appId }
-
+      //mandatory for vanilla js, I have to initialize the script
+      
+      const serverUrl = "https://yzpfthh5clam.usemoralis.com:2053/server";
+      const appId = "jusFwLq4usCZMbjdkJYu2YkTPv9suBBSHpKskgfB";
+      Moralis.start({ serverUrl, appId });
+//showing wha server you are loggin into
+      
+      
+      
       async function login() {
         try {
           let currentUser = Moralis.User.current();
